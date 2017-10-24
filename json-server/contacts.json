@@ -1,0 +1,65 @@
+{
+  "contacts": [
+    {
+      "id": 101,
+      "firstName": "Zero to One",
+      "lastName": "Peter Thiel",
+      "email": 2014,
+      "group": 4.03,
+      "phoneNumbers": [{
+		"type": "Home",
+		"number": "0-800-12345"
+	  },
+	  {
+		"type": "Mobile",
+		"number": "0-800-54321"
+	  },
+	  {
+		"type": "Work",
+		"number": "6666666"
+	  }]
+    },
+	{
+      "id": 102,
+      "firstName": "Zero to One",
+      "lastName": "Peter Thiel",
+      "email": 2014,
+      "group": 4.03,
+      "phoneNumbers": [{
+		"type": "Home",
+		"number": "0-800-12345"
+	  },
+	  {
+		"type": "Mobile",
+		"number": "0-800-54321"
+	  },
+	  {
+		"type": "Work",
+		"number": "6666666"
+	  }]
+    }
+  ],
+  "sortOptions": [
+    {
+      "id": 1,
+      "text": "Year",
+      "value": "year_published"
+    },
+    {
+      "id": 2,
+      "text": "Title",
+      "value": "title"
+    },
+    {
+      "id": 3,
+      "text": "Rating",
+      "value": "rating"
+    }
+  ],
+  "users": [
+    {
+      "username": "jcyovera",
+      "password": "123456"
+    }
+  ]
+}
