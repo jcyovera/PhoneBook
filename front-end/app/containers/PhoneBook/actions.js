@@ -9,7 +9,7 @@ import {
   LOAD_CONTACTS,
   LOAD_CONTACTS_SUCCESS,
   LOAD_CONTACTS_ERROR,
-  UPDATE_CONTACT_LIST
+  UPDATE_FILTERED_CONTACT_LIST
 } from './constants';
 
 export function defaultAction() {
@@ -34,9 +34,9 @@ export function contactLoadingError(error) {
     error,
   };
 }
-export function contactUpdateList(contacts) {
+export function filteredContactUpdateList(contacts) {
   return {
-    type: UPDATE_CONTACT_LIST,
+    type: UPDATE_FILTERED_CONTACT_LIST,
     contacts,
   };
 }

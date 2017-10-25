@@ -14,11 +14,11 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectContacts from './selectors';
+import { makeSelectFilteredContacts, makeSelectContacts } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadContacts, contactUpdateList } from './actions';
+import { loadContacts, filteredContactUpdateList } from './actions';
 
 import ContactCardList from 'components/ContactCardList';
 import MainHeader from 'components/MainHeader';
@@ -31,10 +31,10 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
   render() {
     let card = null;
 
-    if (this.props.contacts) {
-      card = <ContactCardList items={this.props.contacts} />;
+    if (this.props.filteredContacts && this.props.filteredContacts.length) {
+      card = <ContactCardList items={this.props.filteredContacts} />;
     } else {
-      card = (<div>Nadaaaaaa</div>)
+      card = (<div>No contacts matched the provided filter.</div>)
     }
     return (
       <div>
@@ -45,35 +45,37 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
         <FormattedMessage {...messages.header} />
         {
           this.props.contacts ? (<MainHeader numberContacts={this.props.contacts.length}
-            onSearchChange={this.onSearchChange.bind(this)} />) : (<div>NAda</div>)
+            onSearchChange={this.onSearchChange.bind(this)} />) : (<div></div>)
         }
         {card}
       </div>
     );
   }
   onSearchChange(event) {
-    console.log('changing', event.target.value);
     let searchValue = event.target.value;
-
     let contacts = this.props.contacts;
+
     let filteredList = contacts.filter((contact) => {
-      return contact.firstName.indexOf(searchValue) !== -1 ||
-        contact.lastName.indexOf(searchValue) !== -1 ||
-        contact.email.indexOf(searchValue) !== -1;
+      let value = searchValue.toLowerCase();
+
+      return contact.firstName.toLowerCase().indexOf(value) !== -1 ||
+        contact.lastName.toLowerCase().indexOf(value) !== -1 ||
+        contact.email.toLowerCase().indexOf(value) !== -1;
     });
 
-    console.log("asdadasd", filteredList);
     this.props.filter(filteredList);
   }
 }
 
 PhoneBook.propTypes = {
   contacts: PropTypes.array,
+  filteredContacts: PropTypes.array,
   dispatch: PropTypes.func,
   onSearchChange: PropTypes.func
 };
 const mapStateToProps = createStructuredSelector({
   contacts: makeSelectContacts(),
+  filteredContacts: makeSelectFilteredContacts()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -82,11 +84,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(loadContacts())
     },
     filter: (searchValue) => {
-      dispatch(contactUpdateList(searchValue))
+      dispatch(filteredContactUpdateList(searchValue))
     }
   };
 }
-
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

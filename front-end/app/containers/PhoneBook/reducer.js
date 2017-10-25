@@ -10,7 +10,7 @@ import {
   LOAD_CONTACTS,
   LOAD_CONTACTS_SUCCESS,
   LOAD_CONTACTS_ERROR,
-  UPDATE_CONTACT_LIST
+  UPDATE_FILTERED_CONTACT_LIST
 } from './constants';
 
 const initialState = fromJS({});
@@ -23,19 +23,20 @@ function phoneBookReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('contacts', []);
+        .set('contacts', [])
+        .set('filteredContacts', []);
     case LOAD_CONTACTS_SUCCESS:
       return state
         .set('contacts', action.contacts)
+        .set('filteredContacts', action.contacts)
         .set('loading', false)
     case LOAD_CONTACTS_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
-    case UPDATE_CONTACT_LIST:
-      console.log("AHHHHH", action.contacts);
+    case UPDATE_FILTERED_CONTACT_LIST:
       return state
-      .set('contacts', action.contacts)
+        .set('filteredContacts', action.contacts)
     default:
       return state;
   }

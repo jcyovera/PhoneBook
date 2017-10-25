@@ -19,8 +19,14 @@ const makeSelectContacts = () => createSelector(
   (substate) => substate.get('contacts')
 );
 
+const makeSelectFilteredContacts = () => createSelector(
+  selectPhoneBookDomain,
+  (substate) => substate.get('filteredContacts')
+);
+
 export default makeSelectContacts;
 export {
   selectPhoneBookDomain,
-  makeSelectContacts
+  makeSelectContacts,
+  makeSelectFilteredContacts
 };

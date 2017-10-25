@@ -26,7 +26,8 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
-  contacts: []
+  contacts: [],
+  filteredContacts: []
 });
 
 function appReducer(state = initialState, action) {
