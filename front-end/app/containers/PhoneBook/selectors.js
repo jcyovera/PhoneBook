@@ -14,12 +14,13 @@ const selectPhoneBookDomain = (state) => state.get('phoneBook');
  * Default selector used by PhoneBook
  */
 
-const makeSelectPhoneBook = () => createSelector(
+const makeSelectContacts = () => createSelector(
   selectPhoneBookDomain,
-  (substate) => substate.toJS()
+  (substate) => substate.get('contacts')
 );
 
-export default makeSelectPhoneBook;
+export default makeSelectContacts;
 export {
   selectPhoneBookDomain,
+  makeSelectContacts
 };

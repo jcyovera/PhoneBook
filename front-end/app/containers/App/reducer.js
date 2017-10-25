@@ -15,11 +15,7 @@ import { fromJS } from 'immutable';
 import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
-  LOAD_REPOS_ERROR,
-
-  LOAD_CONTACTS_SUCCESS,
-  LOAD_CONTACTS,
-  LOAD_CONTACTS_ERROR
+  LOAD_REPOS_ERROR
 } from './constants';
 
 // The initial state of the App
@@ -50,20 +46,6 @@ function appReducer(state = initialState, action) {
         .set('error', action.error)
         .set('loading', false);
 
-
-    case LOAD_CONTACTS:
-        return state
-          .set('loading', true)
-          .set('error', false)
-          //.set('contacts', []);
-      case LOAD_CONTACTS_SUCCESS:
-        return state
-          .set('contacts', action.contacts)
-          .set('loading', false)
-      case LOAD_CONTACTS_ERROR:
-        return state
-          .set('error', action.error)
-          .set('loading', false);
 
     default:
       return state;

@@ -5,7 +5,11 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  DEFAULT_ACTION, 
+  LOAD_CONTACTS,
+  LOAD_CONTACTS_SUCCESS,
+  LOAD_CONTACTS_ERROR,
+  UPDATE_CONTACT_LIST
 } from './constants';
 
 export function defaultAction() {
@@ -13,3 +17,27 @@ export function defaultAction() {
     type: DEFAULT_ACTION,
   };
 }
+export function loadContacts() {
+  return {
+    type: LOAD_CONTACTS,
+  };
+}
+export function contactsLoaded(contacts) {
+  return {
+    type: LOAD_CONTACTS_SUCCESS,
+    contacts
+  };
+}
+export function contactLoadingError(error) {
+  return {
+    type: LOAD_CONTACTS_ERROR,
+    error,
+  };
+}
+export function contactUpdateList(contacts) {
+  return {
+    type: UPDATE_CONTACT_LIST,
+    contacts,
+  };
+}
+

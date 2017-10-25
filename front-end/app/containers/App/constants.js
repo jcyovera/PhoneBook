@@ -13,8 +13,4 @@ export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
 
-export const LOAD_CONTACTS = 'boilerplate/App/LOAD_CONTACTS';
-export const LOAD_CONTACTS_SUCCESS = 'boilerplate/App/LOAD_CONTACTS_SUCCESS';
-export const LOAD_CONTACTS_ERROR = 'boilerplate/App/LOAD_CONTACTS_ERROR';
-
 export const DEFAULT_LOCALE = 'en';

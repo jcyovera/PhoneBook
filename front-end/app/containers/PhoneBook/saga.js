@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_CONTACTS } from 'containers/App/constants';
-import { contactsLoaded, contactLoadingError } from 'containers/App/actions';
+import { LOAD_CONTACTS} from './constants'
+import { contactsLoaded, contactLoadingError } from './actions';
 
 import request from 'utils/request';
 
@@ -9,6 +9,7 @@ export function* getContacts() {
 
   try {
     const contacts = yield call(request, requestURL);
+    console.log(contacts);
     yield put(contactsLoaded(contacts));
   } catch (err) {
     yield put(contactLoadingError(err));

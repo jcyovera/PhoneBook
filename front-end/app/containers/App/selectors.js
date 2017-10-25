@@ -33,10 +33,6 @@ const makeSelectLocation = () => createSelector(
   (routeState) => routeState.get('location').toJS()
 );
 
-const makeSelectContacts = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.get('contacts')
-);
 
 export {
   selectGlobal,

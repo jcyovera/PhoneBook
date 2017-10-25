@@ -18,16 +18,24 @@ import makeSelectContacts from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadContacts } from '../App/actions';
+import { loadContacts, contactUpdateList } from './actions';
 
 import ContactCardList from 'components/ContactCardList';
+import MainHeader from 'components/MainHeader';
 
 export class PhoneBook extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   //init
   componentDidMount() {
-    dispatch(loadContacts());
+    this.props.initialize();
   }
   render() {
+    let card = null;
+
+    if (this.props.contacts) {
+      card = <ContactCardList items={this.props.contacts} />;
+    } else {
+      card = (<div>Nadaaaaaa</div>)
+    }
     return (
       <div>
         <Helmet>
@@ -35,35 +43,50 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
           <meta name="description" content="Description of PhoneBook" />
         </Helmet>
         <FormattedMessage {...messages.header} />
-        <ContactCardList items={contactList}/>
+        {
+          this.props.contacts ? (<MainHeader numberContacts={this.props.contacts.length}
+            onSearchChange={this.onSearchChange.bind(this)} />) : (<div>NAda</div>)
+        }
+        {card}
       </div>
     );
+  }
+  onSearchChange(event) {
+    console.log('changing', event.target.value);
+    let searchValue = event.target.value;
+
+    let contacts = this.props.contacts;
+    let filteredList = contacts.filter((contact) => {
+      return contact.firstName.indexOf(searchValue) !== -1 ||
+        contact.lastName.indexOf(searchValue) !== -1 ||
+        contact.email.indexOf(searchValue) !== -1;
+    });
+
+    console.log("asdadasd", filteredList);
+    this.props.filter(filteredList);
   }
 }
 
 PhoneBook.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  contacts: PropTypes.array,
+  dispatch: PropTypes.func,
+  onSearchChange: PropTypes.func
 };
-// const contactList=[{
-//   id:1,
-//   firstName:'My name',
-//   lastName:'my last',
-//   email:'my@email.com'
-// },{
-//   id:2,
-//   firstName:'My name2',
-//   lastName:'my last2',
-//   email:'my2@email.com'
-// }];
 const mapStateToProps = createStructuredSelector({
   contacts: makeSelectContacts(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    initialize: () => {
+      dispatch(loadContacts())
+    },
+    filter: (searchValue) => {
+      dispatch(contactUpdateList(searchValue))
+    }
   };
 }
+
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

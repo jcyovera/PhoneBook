@@ -4,7 +4,7 @@
       "id": 101,
       "firstName": "Zero to One",
       "lastName": "Peter Thiel",
-      "email": 2014,
+      "email": "aldo@email.com",
       "group": 4.03,
       "phoneNumbers": [{
 		"type": "Home",
@@ -23,7 +23,7 @@
       "id": 102,
       "firstName": "Zero to One",
       "lastName": "Peter Thiel",
-      "email": 2014,
+      "email": "peach@email.com",
       "group": 4.03,
       "phoneNumbers": [{
 		"type": "Home",

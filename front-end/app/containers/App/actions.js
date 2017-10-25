@@ -18,11 +18,7 @@
 import {
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
-
-  LOAD_CONTACTS,
-  LOAD_CONTACTS_SUCCESS,
-  LOAD_CONTACTS_ERROR
+  LOAD_REPOS_ERROR
 } from './constants';
 
 /**
@@ -35,7 +31,6 @@ export function loadRepos() {
     type: LOAD_REPOS,
   };
 }
-
 /**
  * Dispatched when the repositories are loaded by the request saga
  *
@@ -52,12 +47,6 @@ export function reposLoaded(repos, username) {
   };
 }
 
-export function contactsLoaded(contacts) {
-  return {
-    type: LOAD_CONTACTS_SUCCESS,
-    contacts
-  };
-}
 
 /**
  * Dispatched when loading the repositories fails
@@ -73,9 +62,5 @@ export function repoLoadingError(error) {
   };
 }
 
-export function contactLoadingError(error) {
-  return {
-    type: LOAD_CONTACTS_ERROR,
-    error,
-  };
-}
+
+
