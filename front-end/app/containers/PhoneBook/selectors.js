@@ -23,10 +23,15 @@ const makeSelectFilteredContacts = () => createSelector(
   selectPhoneBookDomain,
   (substate) => substate.get('filteredContacts')
 );
+const makeSelectIsModalVisible = () => createSelector(
+  selectPhoneBookDomain,
+  (substate) => substate.get('isModalVisible')
+);
 
 export default makeSelectContacts;
 export {
   selectPhoneBookDomain,
   makeSelectContacts,
-  makeSelectFilteredContacts
+  makeSelectFilteredContacts,
+  makeSelectIsModalVisible
 };

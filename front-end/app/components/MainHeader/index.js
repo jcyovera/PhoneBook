@@ -12,20 +12,30 @@ import PropTypes from 'prop-types';
 class MainHeader extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
+      <div className="columns">
+         <div className="column is-3">
+        <a className="button is-primary" onClick={this.onShowModalNew.bind(this)}>New Contact</a>
+        </div>
+        <div className="column is-3">
         Contacts count: {this.props.numberContacts}
-        <div> <input placeholder="Search" type="text" onChange={this.myChange.bind(this)} /></div>
+        </div>
+        <div className="column is-3"> 
+          <input placeholder="Search" type="text" className="input" onChange={this.onChangeSearch.bind(this)} /></div>
       </div>
     );
   }
-  myChange(Fuck){
-    this.props.onSearchChange(Fuck);
+  onChangeSearch(searchValue){
+    this.props.onSearchChange(searchValue);
+  }
+  onShowModalNew(value){
+    this.props.onShowModal(value);
   }
 }
 
 MainHeader.propTypes = {
   numberContacts: PropTypes.number,
-  onSearchChange:PropTypes.func
+  onSearchChange:PropTypes.func,
+  onShowModal:PropTypes.func
 };
 
 

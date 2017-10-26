@@ -14,14 +14,15 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectFilteredContacts, makeSelectContacts } from './selectors';
+import { makeSelectFilteredContacts, makeSelectContacts, makeSelectIsModalVisible } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadContacts, filteredContactUpdateList } from './actions';
+import { loadContacts, filteredContactUpdateList, showModal } from './actions';
 
 import ContactCardList from 'components/ContactCardList';
 import MainHeader from 'components/MainHeader';
+import ContactModal from 'components/ContactModal';
 
 export class PhoneBook extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   //init
@@ -37,18 +38,24 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
       card = (<div>No contacts matched the provided filter.</div>)
     }
     return (
+      <section className="section">
+      <div className="container">
       <div>
+        <ContactModal isVisible={this.props.isModalVisible}></ContactModal>
         <Helmet>
           <title>PhoneBook</title>
           <meta name="description" content="Description of PhoneBook" />
         </Helmet>
-        <FormattedMessage {...messages.header} />
+       
         {
-          this.props.contacts ? (<MainHeader numberContacts={this.props.contacts.length}
+          this.props.contacts ? (<MainHeader onShowModal={this.onShowModal.bind(this)}
+          numberContacts={this.props.contacts.length}
             onSearchChange={this.onSearchChange.bind(this)} />) : (<div></div>)
         }
         {card}
       </div>
+      </div>
+      </section>
     );
   }
   onSearchChange(event) {
@@ -65,17 +72,22 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
 
     this.props.filter(filteredList);
   }
+  onShowModal(){
+    this.props.showModal();
+  }
 }
 
 PhoneBook.propTypes = {
   contacts: PropTypes.array,
   filteredContacts: PropTypes.array,
   dispatch: PropTypes.func,
-  onSearchChange: PropTypes.func
+  onSearchChange: PropTypes.func,
+  isModalVisible:PropTypes.bool
 };
 const mapStateToProps = createStructuredSelector({
   contacts: makeSelectContacts(),
-  filteredContacts: makeSelectFilteredContacts()
+  filteredContacts: makeSelectFilteredContacts(),
+  isModalVisible:makeSelectIsModalVisible()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -85,7 +97,10 @@ function mapDispatchToProps(dispatch) {
     },
     filter: (searchValue) => {
       dispatch(filteredContactUpdateList(searchValue))
-    }
+    },
+    showModal: () => {
+      dispatch(showModal())
+    },
   };
 }
 

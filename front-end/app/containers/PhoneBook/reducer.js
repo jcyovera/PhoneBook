@@ -10,7 +10,8 @@ import {
   LOAD_CONTACTS,
   LOAD_CONTACTS_SUCCESS,
   LOAD_CONTACTS_ERROR,
-  UPDATE_FILTERED_CONTACT_LIST
+  UPDATE_FILTERED_CONTACT_LIST,
+  SHOW_MODAL
 } from './constants';
 
 const initialState = fromJS({});
@@ -37,6 +38,10 @@ function phoneBookReducer(state = initialState, action) {
     case UPDATE_FILTERED_CONTACT_LIST:
       return state
         .set('filteredContacts', action.contacts)
+    case SHOW_MODAL:
+      return state
+        .set('isModalVisible', true)
+        
     default:
       return state;
   }

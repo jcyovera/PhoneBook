@@ -26,7 +26,7 @@ function ContactCardList(props) {
   console.log(content);
   return (
 
-    <div>
+    <div  className="columns">
       {content}
     </div>
   );

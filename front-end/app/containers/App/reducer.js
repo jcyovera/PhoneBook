@@ -27,7 +27,8 @@ const initialState = fromJS({
     repositories: false,
   },
   contacts: [],
-  filteredContacts: []
+  filteredContacts: [],
+  isModalVisible:false
 });
 
 function appReducer(state = initialState, action) {

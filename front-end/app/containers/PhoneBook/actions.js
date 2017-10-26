@@ -9,7 +9,8 @@ import {
   LOAD_CONTACTS,
   LOAD_CONTACTS_SUCCESS,
   LOAD_CONTACTS_ERROR,
-  UPDATE_FILTERED_CONTACT_LIST
+  UPDATE_FILTERED_CONTACT_LIST,
+  SHOW_MODAL
 } from './constants';
 
 export function defaultAction() {
@@ -38,6 +39,11 @@ export function filteredContactUpdateList(contacts) {
   return {
     type: UPDATE_FILTERED_CONTACT_LIST,
     contacts,
+  };
+}
+export function showModal() {
+  return {
+    type: SHOW_MODAL,
   };
 }
 
