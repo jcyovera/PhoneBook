@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 function ContactCard(props) {
   return (
-    <div className="column is-3">
+    <div className="column is-4">
     <div className="card">
       <div className="card-image">
         <figure className="image is-4by3">

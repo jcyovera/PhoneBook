@@ -39,7 +39,7 @@ export class PhoneBook extends React.PureComponent { // eslint-disable-line reac
     }
     return (
       <section className="section">
-      <div className="container">
+      <div className="container is-fluid">
       <div>
         <ContactModal isVisible={this.props.isModalVisible}></ContactModal>
         <Helmet>

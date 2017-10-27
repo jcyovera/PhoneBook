@@ -26,7 +26,7 @@ export function loadContacts() {
 export function contactsLoaded(contacts) {
   return {
     type: LOAD_CONTACTS_SUCCESS,
-    contacts
+    contacts:contacts.data.contacts
   };
 }
 export function contactLoadingError(error) {

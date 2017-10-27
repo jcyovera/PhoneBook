@@ -5,7 +5,7 @@ import { contactsLoaded, contactLoadingError } from './actions';
 import request from 'utils/request';
 
 export function* getContacts() {
-  const requestURL = `http://localhost:3003/contacts`;
+  const requestURL = `http://localhost:4000/graphql?query={contacts{firstName addresses{id name}lastName id email}}`;
 
   try {
     const contacts = yield call(request, requestURL);
